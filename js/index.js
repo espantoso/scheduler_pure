@@ -64,7 +64,7 @@ function uploadFile(file) {
     };
 
     xhr.open('POST', 'https://content.dropboxapi.com/2/files/upload');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + "");
+    xhr.setRequestHeader('Authorization', 'Bearer ' + process.env.DROPBOX_KEY);
     xhr.setRequestHeader('Content-Type', 'application/octet-stream');
     xhr.setRequestHeader('Dropbox-API-Arg', JSON.stringify({
         path: '/' + file.name,
