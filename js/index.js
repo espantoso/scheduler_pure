@@ -30,6 +30,8 @@ function fnExcelReport() {
     return (sa);
 }
 
+
+
 function addRow() {
 
     let table = document.getElementById("testTable")
@@ -40,13 +42,36 @@ function addRow() {
         let cell = row.insertCell()
         cell.setAttribute('contentEditable', 'true');
     }
+}
 
+function saveFile() {
+    var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j = 0;
+    tab = document.getElementById('testTable'); // id of table
 
+    for (j = 0; j < tab.rows.length; j++) {
+        tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text = tab_text + "</table>";
+    // tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    // tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+    // tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    var blob = new Blob([tab_text], {type: 'text/plain'});
+
+    sa = uploadFile(blob)
+
+    return (sa);
 }
 
 function uploadFile(file) {
     var xhr = new XMLHttpRequest();
-    file = file.files[0]
+    file = file
     xhr.upload.onprogress = function (evt) {
         var percentComplete = parseInt(100.0 * evt.loaded / evt.total);
         // Upload in progress. Do something here with the percent complete.
@@ -64,10 +89,10 @@ function uploadFile(file) {
     };
 
     xhr.open('POST', 'https://content.dropboxapi.com/2/files/upload');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + process.env.DROPBOX_KEY);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + "sl.A67GwkfCEESPoPHC-2GDEwGM03ziJmAft5WWAw_DDiUr4Kcxys4jpgPD780sCVQmYRcw3CaOOw8w-1PTVDZpLPjZW6uVwWnJ19-K5ebmIF-kB45wQPRWSM3xAQDlQqMuRvwZTSQ");
     xhr.setRequestHeader('Content-Type', 'application/octet-stream');
     xhr.setRequestHeader('Dropbox-API-Arg', JSON.stringify({
-        path: '/' + file.name,
+        path: '/' + "file.txt",
         mode: 'add',
         autorename: true,
         mute: false
