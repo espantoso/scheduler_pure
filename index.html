@@ -12,7 +12,6 @@
 
   <link rel="stylesheet" href="css/style.css">
 
-
 </head>
 
 <body>
@@ -112,7 +111,9 @@
 
   <button id="btn" onclick="addRow();"> Add row </button>
   <button id="btnExport" onclick="fnExcelReport();"> EXPORT </button>
-
+  <form>
+    <input type="file" name="file" accept="image/*" onchange="uploadFile(this);">
+  </form>
   <p class="p">Demo by George Martsoukos. <a
       href="http://www.sitepoint.com/responsive-data-tables-comprehensive-list-solutions" target="_blank">See
       article</a>.</p>
